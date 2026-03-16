@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>WordPong</title>
+    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="myid"></div>
+    <button id="startInfo" class="info" onclick="giveInfo()">?</button>
+    <div id="replaceable">
+      <div id="popUp"></div>
+      <h1 id="title">WordPong!</h1><br>
+      <div id="mainCont">
+        <input type='text' id='txtInp' placeholder="Enter Opponent's ID"><br>
+        <button id="connect" class="blueBTN">Connect Player</button>
+      </div>
+      <br>
+      <br>
+      <div id="otherOptions">
+        <h2>Game Options:</h2>
+        <label for="MaxTime">Time (each) minutes</label>
+        <input type="number" id="MaxTime" min="1" max="10" step="1">
+        <br>
+        <select id="mode">
+          <option selected="selected" value="race">Race Game</option>
+          <option value="wordAsc">On The Clock Association</option>
+          <option value="geoGame">Capital Chaos</option>
+          <option value="lang">Custom</option>
+        </select>
+      </div>
+      <br>
+      <button id="start" class="blueBTN">Start Game</button>
+    </div>
+    <script src="//unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+      const words =["ability","able","aboard","above","accept","accident","according","account","accurate","acres","across","act","action","active","activity","actual","actually","add","addition","additional","adjective","adult","adventure","advice","affect","afraid","after","afternoon","again","against","age","agree","ahead","aid","air","airplane","alike","alive","allow","almost","alone","aloud","alphabet","among","amount","ancient","angle","angry","animal","announced","another","answer","ants","any","anybody","anyone","anything","anyway","anywhere","apart","apartment","appearance","apple","applied","appropriate","are","area","arm","army","around","arrange","arrangement","arrive","arrow","art","article","aside","ask","asleep","ate","atmosphere","atom","atomic","attached","attack","attempt","attention","audience","author","automobile","available","average","avoid","aware","away","baby","back","bad","badly","bag","balance","ball","balloon","band","bank","bar","bare","bark","barn","base","baseball","basic","basis","basket","bat","battle","bean","bear","beat","beautiful","beauty","became","because","become","becoming","bee","been","before","began","beginning","begun","behavior","behind","being","believed","bell","belong","below","belt","bend","beneath","bent","beside","best","bet","better","between","bicycle","bigger","biggest","bill","birds","birth","birthday","bit","bite","black","blank","blanket","blew","blind","block","blood","blow","blue","board","boat","body","bone","book","border","born","both","bottle","bottom","bound","bow","bowl","box","boy","brain","branch","brass","brave","bread","break","breakfast","breath","breathe","breathing","breeze","brick","bridge","brief","bright","bring","broad","broke","broken","brother","brought","brown","brush","buffalo","build","building","built","buried","burn","burst","bus","bush","business","busy","butter","buy","cabin","cage","cake","call","calm","came","camera","camp","can","canal","cannot","cap","capital","captain","captured","car","carbon","card","care","careful","carefully","carried","carry","case","cast","castle","cat","catch","cattle","caught","cause","cave","cell","cent","center","central","century","certain","certainly","chain","chair","chamber","chance","change","changing","chapter","character","characteristic","charge","chart","check","cheese","chemical","chest","chicken","chief","child","children","choice","choose","chose","chosen","church","circle","circus","citizen","city","class","classroom","claws","clay","clean","clear","clearly","climate","climb","clock","close","closely","closer","cloth","clothes","clothing","cloud","club","coach","coal","coast","coat","coffee","cold","collect","college","colony","color","column","combination","combine","come","comfortable","coming","command","common","community","company","compare","compass","complete","completely","complex","composed","composition","compound","concerned","condition","congress","connected","consider","consist","consonant","constantly","construction","contain","continent","continued","contrast","control","conversation","cook","cookies","cool","copper","copy","corn","corner","correct","correctly","cost","cotton","could","count","country","couple","courage","course","court","cover","cow","cowboy","crack","cream","create","creature","crew","crop","cross","crowd","cry","cup","curious","current","curve","customs","cut","cutting","daily","damage","dance","danger","dangerous","dark","darkness","date","daughter","dawn","day","dead","deal","dear","death","decide","declared","deep","deeply","deer","definition","degree","depend","depth","describe","desert","design","desk","detail","determine","develop","development","diagram","diameter","did","die","differ","difference","different","difficult","difficulty","dig","dinner","direct","direction","directly","dirt","dirty","disappear","discover","discovery","discuss","discussion","disease","dish","distance","distant","divide","division","doctor","does","dog","doing","doll","dollar","done","donkey","door","dot","double","doubt","down","dozen","draw","drawn","dream","dress","drew","dried","drink","drive","driven","driver","driving","drop","dropped","drove","dry","duck","due","dug","dull","during","dust","duty","each","eager","ear","earlier","early","earn","earth","easier","easily","east","easy","eat","eaten","edge","education","effect","effort","egg","either","electric","electricity","element","elephant","else","empty","end","enemy","energy","engine","engineer","enjoy","enough","enter","entire","entirely","environment","equal","equally","equator","equipment","escape","especially","essential","establish","even","evening","event","eventually","ever","every","everybody","everyone","everything","everywhere","evidence","exact","exactly","examine","example","excellent","except","exchange","excited","excitement","exciting","exclaimed","exercise","exist","expect","experience","experiment","explain","explanation","explore","express","expression","extra","eye","face","facing","fact","factor","factory","failed","fair","fairly","fall","fallen","familiar","family","famous","far","farm","farmer","farther","fast","fastened","faster","fat","father","favorite","fear","feathers","feature","fed","feed","feel","feet","fell","fellow","felt","fence","few","fewer","field","fierce","fifth","fifty","fight","fighting","figure","fill","film","final","finally","find","fine","finest","finger","finish","fire","fireplace","firm","first","fish","fix","flag","flame","flat","flew","flies","flight","floating","floor","flow","flower","fly","fog","folks","follow","food","foot","football","force","foreign","forest","forget","forgot","forgotten","form","former","fort","forth","forty","forward","fought","found","fourth","fox","frame","free","freedom","frequently","fresh","friend","friendly","frighten","frog","front","frozen","fruit","fuel","full","fully","fun","function","funny","fur","furniture","further","future","gain","game","garage","garden","gas","gasoline","gate","gather","gave","general","generally","gentle","gently","getting","giant","gift","girl","give","given","giving","glad","glass","globe","goes","gold","golden","gone","good","goose","got","government","grabbed","grade","gradually","grain","grandfather","grandmother","graph","grass","gravity","gray","great","greater","greatest","greatly","green","grew","ground","group","grow","grown","growth","guard","guess","guide","gulf","gun","habit","had","hair","half","halfway","hall","hand","handle","handsome","hang","happen","happened","happily","happy","harbor","hard","hardly","has","hat","having","hay","headed","heading","health","heard","hearing","heart","heat","heavy","height","held","hello","help","helpful","herd","here","herself","hidden","hide","high","higher","highest","highway","hill","him","himself","history","hit","hold","hole","hollow","home","honor","hope","horn","horse","hospital","hot","hour","house","how","however","huge","human","hundred","hung","hungry","hunt","hunter","hurried","hurry","hurt","husband","ice","idea","identity","ill","image","imagine","immediately","importance","important","impossible","improve","inch","include","including","income","increase","indeed","independent","indicate","individual","industrial","industry","influence","information","inside","instance","instant","instead","instrument","interest","interior","into","introduced","invented","involved","iron","island","its","itself","jack","jar","jet","job","join","joined","journey","joy","judge","jump","jungle","just","keep","kept","key","kids","kill","kind","kitchen","knew","knife","know","knowledge","known","label","labor","lack","lady","laid","lake","lamp","land","language","large","larger","largest","last","late","later","laugh","law","lay","layers","lead","leader","leaf","learn","least","leather","leave","leaving","led","left","leg","length","lesson","let","letter","level","library","lie","life","lift","light","like","likely","limited","line","lion","lips","liquid","list","listen","little","live","living","load","local","locate","location","log","lonely","long","longer","look","loose","lose","loss","lost","lot","loud","love","lovely","low","lower","luck","lucky","lunch","lungs","lying","machine","machinery","mad","made","magic","magnet","mail","main","mainly","major","make","making","man","managed","manner","manufacturing","many","map","mark","market","married","mass","massage","master","material","mathematics","matter","may","maybe","meal","mean","means","meant","measure","meat","medicine","meet","melted","member","memory","men","mental","merely","met","metal","method","mice","middle","mighty","mile","military","milk","mill","mind","minerals","minute","mirror","missing","mission","mistake","mix","mixture","model","modern","molecular","moment","money","monkey","month","mood","moon","more","morning","most","mostly","mother","motion","motor","mountain","mouse","mouth","move","movement","movie","moving","mud","muscle","music","musical","must","myself","mysterious","nails","name","nation","national","native","natural","naturally","nature","near","nearby","nearer","nearest","nearly","necessary","neck","needed","needle","needs","negative","neighbor","neighborhood","nervous","nest","never","new","news","newspaper","next","nice","night","no","nobody","nodded","noise","none","noon","nor","north","nose","note","noted","nothing","notice","noun","now","number","numeral","nuts","object","observe","obtain","occasionally","occur","ocean","off","offer","office","officer","official","oil","old","older","oldest","once","only","onto","open","operation","opinion","opportunity","opposite","orange","orbit","order","ordinary","organization","organized","origin","original","other","ought","our","ourselves","out","outer","outline","outside","over","own","owner","oxygen","pack","package","page","paid","pain","paint","pair","palace","pale","pan","paper","paragraph","parallel","parent","park","part","particles","particular","particularly","partly","parts","party","pass","passage","past","path","pattern","pay","peace","pen","pencil","people","per","percent","perfect","perfectly","perhaps","period","person","personal","pet","phrase","physical","piano","pick","picture","pictured","pie","piece","pig","pile","pilot","pine","pink","pipe","pitch","place","plain","plan","plane","planet","planned","planning","plant","plastic","plate","plates","play","pleasant","please","pleasure","plenty","plural","plus","pocket","poem","poet","poetry","point","pole","police","policeman","political","pond","pony","pool","poor","popular","population","porch","port","position","positive","possible","possibly","post","pot","potatoes","pound","pour","powder","power","powerful","practical","practice","prepare","present","president","press","pressure","pretty","prevent","previous","price","pride","primitive","principal","principle","printed","private","prize","probably","problem","process","produce","product","production","program","progress","promised","proper","properly","property","protection","proud","prove","provide","public","pull","pupil","pure","purple","purpose","push","put","putting","quarter","queen","question","quick","quickly","quiet","quietly","quite","rabbit","race","radio","railroad","rain","raise","ran","ranch","range","rapidly","rate","rather","raw","rays","reach","read","reader","ready","real","realize","rear","reason","recall","receive","recent","recently","recognize","record","red","refer","refused","region","regular","related","relationship","religious","remain","remarkable","remember","remove","repeat","replace","replied","report","represent","require","research","respect","rest","result","return","review","rhyme","rhythm","rice","rich","ride","riding","right","ring","rise","rising","river","road","roar","rock","rocket","rocky","rod","roll","roof","room","root","rope","rose","rough","round","route","row","rubbed","rubber","rule","ruler","run","running","rush","sad","saddle","safe","safety","said","sail","sale","salmon","salt","same","sand","sang","sat","satellites","satisfied","save","saved","saw","say","scale","scared","scene","school","science","scientific","scientist","score","screen","sea","search","season","seat","second","secret","section","see","seed","seeing","seems","seen","seldom","select","selection","sell","send","sense","sent","sentence","separate","series","serious","serve","service","sets","setting","settle","settlers","several","shade","shadow","shake","shaking","shall","shallow","shape","share","sharp","sheep","sheet","shelf","shells","shelter","shine","shinning","ship","shirt","shoe","shoot","shop","shore","short","shorter","shot","should","shoulder","shout","show","shown","shut","sick","sides","sight","sign","signal","silence","silent","silk","silly","silver","similar","simple","simplest","simply","since","sing","single","sink","sister","sit","sitting","situation","size","skill","skin","sky","slabs","sleep","slept","slide","slight","slightly","slip","slipped","slope","slow","slowly","small","smaller","smallest","smell","smile","smoke","smooth","snake","snow","so","soap","social","society","soft","softly","soil","solar","sold","soldier","solid","solution","solve","some","somebody","somehow","someone","something","sometime","somewhere","son","song","soon","sort","sound","source","south","southern","space","speak","special","species","specific","speech","speed","spell","spend","spent","spider","spin","spirit","spite","split","spoken","sport","spread","spring","square","stage","stairs","stand","standard","star","stared","start","state","statement","station","stay","steady","steam","steel","steep","stems","step","stepped","stick","stiff","still","stock","stomach","stone","stood","stop","stopped","store","storm","story","stove","straight","strange","stranger","straw","stream","street","strength","stretch","strike","string","strip","strong","stronger","struck","structure","struggle","stuck","student","studied","studying","subject","substance","success","successful","such","sudden","suddenly","sugar","suggest","suit","sum","summer","sun","sunlight","supper","supply","support","suppose","sure","surface","surprise","surrounded","swam","sweet","swept","swim","swimming","swing","swung","syllable","symbol","system","table","tail","take","taken","tales","talk","tall","tank","tape","task","taste","taught","tax","tea","teach","teacher","team","tears","teeth","telephone","television","tell","temperature","tent","term","terrible","test","than","thank","thee","them","themselves","theory","therefore","these","thick","thin","thing","think","third","thirty","those","though","thought","thousand","thread","threw","throat","through","throughout","throw","thrown","thumb","thus","thy","tide","tie","tight","tightly","till","time","tin","tiny","tip","tired","title","to","tobacco","today","together","told","tomorrow","tone","tongue","tonight","took","tool","top","topic","torn","total","touch","toward","tower","town","toy","trace","track","trade","traffic","trail","train","transportation","trap","travel","treated","tree","triangle","tribe","trick","tried","trip","troops","tropical","trouble","truck","trunk","truth","try","tube","tune","turn","twenty","twice","type","typical","uncle","under","underline","understanding","unhappy","union","unit","universe","unknown","unless","until","unusual","up","upon","upper","upward","us","use","useful","using","usual","usually","valley","valuable","value","vapor","variety","various","vast","vegetable","verb","vertical","very","vessels","victory","view","village","visit","visitor","voice","volume","vote","vowel","voyage","wagon","wait","walk","wall","want","war","warm","warn","wash","waste","watch","water","wave","way","weak","wealth","wear","weather","week","weigh","weight","welcome","well","went","were","west","western","wet","whale","whatever","wheat","wheel","when","whenever","where","wherever","whether","which","while","whispered","whistle","white","whole","whom","whose","why","wide","widely","wife","wild","will","willing","win","wind","window","wing","winter","wire","wise","wish","within","without","wolf","women","won","wonder","wonderful","wood","wooden","wool","word","wore","work","worker","world","worried","worry","worse","worth","would","wrapped","write","writer","writing","written","wrong","wrote","yard","year","yellow","yes","yesterday","young","younger","your","yourself","youth","zero","zebra","zipper","zoo","zulu"]
+
+      var countries = ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Central African Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Comoros', 'Costa Rica', 'Croatia', 'Cuba', 'Cyprus', 'Czech Republic', 'Democratic Republic of Congo', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'East Timor', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Grenada', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Ivory Coast', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Korea, North', 'Korea, South', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauru', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Republic of the Congo', 'Romania', 'Russia', 'Rwanda', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'São Tomé and Príncipe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe']
+
+      var capitals = ['Kabul', 'Tirana', 'Algiers', 'Andorra la Vella', 'Luanda', "St. John's", 'Buenos Aires', 'Yerevan', 'Canberra', 'Vienna', 'Baku', 'Nassau', 'Manama', 'Dhaka', 'Bridgetown', 'Minsk', 'Brussels', 'Belmopan', 'Porto Novo', 'Thimphu', 'Sucre', 'Sarajevo', 'Gaborone', 'Brasilia', 'Bandar Seri Begawan', 'Sofia', 'Ouagadougou', 'Bujumbura', 'Phnom Penh', 'Yaoundé', 'Ottawa', 'Praia', 'Bangui', "N'Djamena", 'Santiago', 'Beijing', 'Bogota', 'Moroni', 'San José', 'Zagreb', 'Havana', 'Nicosia', 'Prague', 'Kinshasa', 'Copenagen', 'Djibouti', 'Roseau', 'Santo Domingo', 'Dili', 'Quito', 'Cairo', 'San Salvador', 'Malabo', 'Asmara', 'Tallinn', 'Mbabane', 'Addis Ababa', 'Suva', 'Helsinki', 'Paris', 'Libreville', 'Banjul', 'Tbilisi', 'Berlin', 'Accra', 'Athens', "St. George's", 'Guatemala City', 'Conakry', 'Bissau', 'Georgetown', 'Port-au-Prince', 'Tegucigalpa', 'Budapest', 'Reykjavík', 'New Delhi', 'Jakarta', 'Tehran', 'Baghdad', 'Dublin', 'Jerusalem', 'Rome', 'Yamoussoukro', 'Kingston', 'Tokyo', 'Amman', 'Astana', 'Nairobi', 'Tarawa', 'Pyongyang', 'Seoul', 'Pristina', 'Kuwait City', 'Bishkek', 'Vientiane', 'Riga', 'Beirut', 'Maseru', 'Monrovia', 'Tripoli', 'Vaduz', 'Vilnius', 'Luxembourg', 'Antananarivo', 'Lilongwe', 'Kuala Lumpur', 'Malé', 'Bamako', 'Valletta', 'Majuro', 'Nouakchott', 'Port Louis', 'Mexico City', 'Palikir', 'Chisinau', 'Monaco', 'Ulaanbaatar', 'Podgorica', 'Rabat', 'Maputo', 'Naypyidaw', 'Windhoek', 'Yaren', 'Kathmandu', 'Amsterdam', 'Wellington', 'Managua', 'Niamey', 'Abuja', 'Skopje', 'Oslo', 'Muscat', 'Islamabad', 'Melekeok', 'East Jerusalem', 'Panama City', 'Port Moresby', 'Asunción', 'Lima', 'Manila', 'Warsaw', 'Lisbon', 'Doha', 'Brazzaville', 'Bucharest', 'Moscow', 'Kigali', 'Basseterre', 'Castries', 'Kingstown', 'Apia', 'San Marino', 'São Tomé', 'Riyadh', 'Dakar', 'Belgrade', 'Victoria', 'Freetown', 'Singapore', 'Bratislava', 'Ljubljana', 'Honiara', 'Mogadishu', 'Pretoria', 'Juba', 'Madrid', 'Sri Jayawardenapura Kotte', 'Khartoum', 'Paramaribo', 'Stockholm', 'Bern', 'Damascus', 'Taipei', 'Dushanbe', 'Dodoma', 'Bangkok', 'Lomé', 'Nukualofa', 'Port of Spain', 'Tunis', 'Ankara', 'Ashgabat', 'Funafuti', 'Kampala', 'Kiev', 'Abu Dhabi', 'London', 'Washington D.C.', 'Montevideo', 'Tashkent', 'Port Vila', 'Vatican City', 'Caracas', 'Hanoi', "Sana'a", 'Lusaka', 'Harare']
+      
+      var classic = `<div id="timeFlexCont"><div id="mytime"></div>
+      <div id="oppTime"></div></div><br><br><br>
+      <div id="question"></div>
+      <input type="text" id="answer">
+      <progress id='boost' max='20'></progress>
+      `
+      var geoGame = `<div id="timeFlexCont"><div id="mytime"></div>
+      <div id="oppTime"></div></div><br><br><br>
+      <div id="question"></div>
+      <input type="text" id="answer">
+      <audio src=""></audio>
+      `
+      var langGame = `<div id="timeFlexCont"><div id="mytime"></div>
+      <div id="oppTime"></div></div><br><br><br>
+      <div id="question"></div>
+      <input type="text" id="answer">
+      `
+
+      var racingGame = `<svg width="100%" height="500" viewBox="0 0 1000 1000">
+      <rect width="100%" height="80%" fill="#32a852"/>
+  <g transform="translate(60,50) scale(1.3)" id="layer1">
+   <path d="M160 80 600 80C640 80 680 120 680 160L680 360C680 400 640 440 600 440L480 440C480 440 440 440 440 400L440 320C440 320 440 280 400 280L280 280C280 280 240 280 240 240L240 200C240 160 200 160 200 160L120 160C80 160 80 186.668 80 200L80 440C80 440 80 480 40 480 40 480 0 480 0 440L0 120C0 80 40 80 40 80L120 80" id="track" style="fill:none;stroke:black;stroke-width:70;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray="2 2""></path>
+   <path d="M160 80 600 80C640 80 680 120 680 160L680 360C680 400 640 440 600 440L480 440C480 440 440 440 440 400L440 320C440 320 440 280 400 280L280 280C280 280 240 280 240 240L240 200C240 160 200 160 200 160L120 160C80 160 80 186.668 80 200L80 440C80 440 80 480 40 480 40 480 0 480 0 440L0 120C0 80 40 80 40 80L120 80" id="track" style="fill:none;stroke:white;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray: 25"></path>
+
+    <g id="myCar" style="width: 50px;" transform="translate(160,80) rotate(0) scale(0.15)">
+      <path fill="#000000" fill-opacity="0.0" d="m0 0l392.86877 0l0 203.71916l-392.86877 0z" fill-rule="evenodd"></path><path fill="#434343" d="m39.72441 197.09186l75.84252 0l0 6.4881897l-75.84252 0z" fill-rule="evenodd"></path><path fill="#ff3232" d="m8.399812 6.5091863l375.71652 0l0 190.58267l-375.71652 0z" fill-rule="evenodd"></path><path fill="#ff3232" d="m0 12.625144l392.50394 0l0 178.33072l-392.50394 0z" fill-rule="evenodd"></path><path fill="#434343" d="m39.72441 33.75853l75.84252 0l0 136.06299l-75.84252 0z" fill-rule="evenodd"></path><path fill="#ffff00" d="m367.21783 35.73491l25.291351 0l0 24.094486l-25.291351 0z" fill-rule="evenodd"></path><path fill="#ffff00" d="m367.21783 145.72704l25.291351 0l0 24.094482l-25.291351 0z" fill-rule="evenodd"></path><path fill="#434343" d="m39.72441 0l75.84252 0l0 6.4881887l-75.84252 0z" fill-rule="evenodd"></path><path fill="#434343" d="m260.4882 0l75.84253 0l0 6.4881887l-75.84253 0z" fill-rule="evenodd"></path><path fill="#434343" d="m260.4882 197.09186l75.84253 0l0 6.4881897l-75.84253 0z" fill-rule="evenodd"></path><path fill="#990000" d="m0 34.74672l25.291338 0l0 24.094486l-25.291338 0z" fill-rule="evenodd"></path><path fill="#990000" d="m0 144.73885l25.291338 0l0 24.094482l-25.291338 0z" fill-rule="evenodd"></path><path fill="#ffffff" d="m303.4042 73.70604l89.102356 0l0 13.22834l-89.102356 0z" fill-rule="evenodd"></path><path fill="#ffffff" d="m303.4042 112.81759l89.102356 0l0 13.22834l-89.102356 0z" fill-rule="evenodd"></path><path fill="#434343" d="m228.48819 34.53018l75.84253 0l0 136.06299l-75.84253 0z" fill-rule="evenodd"></path>
+    </g>
+    <g id="oppCar" style="width: 50px;" transform="translate(160,47) rotate(0) scale(0.15)">
+      <path fill="#000000" fill-opacity="0.0" d="m0 0l392.86877 0l0 203.71916l-392.86877 0z" fill-rule="evenodd"></path><path fill="#434343" d="m39.72441 197.09186l75.84252 0l0 6.4881897l-75.84252 0z" fill-rule="evenodd"></path><path fill="#3232ff" d="m8.399812 6.5091863l375.71652 0l0 190.58267l-375.71652 0z" fill-rule="evenodd"></path><path fill="#3232ff" d="m0 12.625144l392.50394 0l0 178.33072l-392.50394 0z" fill-rule="evenodd"></path><path fill="#434343" d="m39.72441 33.75853l75.84252 0l0 136.06299l-75.84252 0z" fill-rule="evenodd"></path><path fill="#ffff00" d="m367.21783 35.73491l25.291351 0l0 24.094486l-25.291351 0z" fill-rule="evenodd"></path><path fill="#ffff00" d="m367.21783 145.72704l25.291351 0l0 24.094482l-25.291351 0z" fill-rule="evenodd"></path><path fill="#434343" d="m39.72441 0l75.84252 0l0 6.4881887l-75.84252 0z" fill-rule="evenodd"></path><path fill="#434343" d="m260.4882 0l75.84253 0l0 6.4881887l-75.84253 0z" fill-rule="evenodd"></path><path fill="#434343" d="m260.4882 197.09186l75.84253 0l0 6.4881897l-75.84253 0z" fill-rule="evenodd"></path><path fill="#990000" d="m0 34.74672l25.291338 0l0 24.094486l-25.291338 0z" fill-rule="evenodd"></path><path fill="#990000" d="m0 144.73885l25.291338 0l0 24.094482l-25.291338 0z" fill-rule="evenodd"></path><path fill="#ffffff" d="m303.4042 73.70604l89.102356 0l0 13.22834l-89.102356 0z" fill-rule="evenodd"></path><path fill="#ffffff" d="m303.4042 112.81759l89.102356 0l0 13.22834l-89.102356 0z" fill-rule="evenodd"></path><path fill="#434343" d="m228.48819 34.53018l75.84253 0l0 136.06299l-75.84253 0z" fill-rule="evenodd"></path>
+    </g>
+  </g>
+</svg>
+      <div class="moveUp">
+        <div id="question">example</div>
+        <input type="text" id="answer">
+        <progress value="0" max="10" id="tenstimer"></progress>
+      </div>
+      `
+
+      var langGetVocab = `<button id="closePopup" style='position:relative; top: 5px; float: right;' onclick="this.parentElement.style.display='none'">×</button>
+      <h2>Enter Your Terms:</h2>
+      <p>Enter the term, then the definition separated with a comma (,)</p>
+      <br>
+      <textarea id="terms"></textarea>
+      <button class="done" onclick="doneAddingTerms();this.parentElement.style.display='none'">DONE</button>`
+      
+      var gameOver = `<div id='winner'><h1>You Lost :(</h1><br>Better luck next time!</div>`
+      var gameWin = `<div id='winnerScreen'><h1>🏆 You Won!!!</h1><br>Well Done!</div>`
+      var gameVals = ['wordAsc', 'geoGame', 'lang', 'race']
+      var gameModes = [classic, geoGame, langGame, racingGame]
+      var modeChosen = 0
+      var usedWords = []
+      var terms = []
+      var definitions = []
+      var meMins = 0
+      var meSec = 0
+      var oppMins = 0
+      var oppSec = 0
+      var boost = 0
+      var startTime, endTime;
+      var myCarDist = 0
+      var oppCarDist = 0
+      var prevRotation = 0
+      var gameConnected = false
+      var startedGame;
+      var timer;
+      
+      function changeCarPos(distanceTravelled, carID) {
+        if (!(startedGame)){
+          if (carID == "myCar"){
+            carID = "oppCar"
+          } else{
+            carID = "myCar"
+          }
+        }
+        var total = 250
+        var  track = document.getElementById("track");
+        var  trackLength = track.getTotalLength();
+        console.log(trackLength + " " + distanceTravelled)
+        var  distanceOnTrack = trackLength * distanceTravelled / total;
+        console.log(Math.round(distanceOnTrack))
+        var  pos = track.getPointAtLength(Math.round(distanceOnTrack));
+        // Calculate position a little ahead of the car (or behind if we are at the end), so we can calculate car angle
+        if (distanceOnTrack + 1 <= trackLength) {
+          var  posAhead = track.getPointAtLength(distanceOnTrack + 1);
+          var  angle = Math.atan2(posAhead.y - pos.y, posAhead.x - pos.x);
+        } else {
+          var  posBehind = track.getPointAtLength(distanceOnTrack - 1);
+          var  angle = Math.atan2(pos.y - posBehind.y, pos.x - posBehind.x);
+        }
+        var angInDeg = radiansToDegrees(angle)
+        if (prevRotation < 180 && (angInDeg > (prevRotation + 180))){
+          angInDeg -= 360;
+        } else if ( prevRotation >= 180 && (angInDeg <= (prevRotation - 180))){
+          angInDeg += 360;
+        }
+        // Position the car at "pos" totated by "angle"
+        var  car = document.getElementById(carID);
+        if (carID == "myCar"){
+          car.setAttribute("transform", "translate(" + pos.x + "," + pos.y + ") rotate(" + angInDeg + ") scale(0.15)");
+        } else{
+          if (distanceTravelled >= 0 && distanceTravelled <= 50){
+            car.setAttribute("transform", "translate(" + pos.x + "," + Math.max(0, pos.y-33) + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 50 && distanceTravelled <= 80){
+            car.setAttribute("transform", "translate(" + (pos.x + 33) + "," + pos.y + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 80 && distanceTravelled <= 105){
+            car.setAttribute("transform", "translate(" + pos.x + "," + (pos.y + 33) + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 105 && distanceTravelled <= 120){
+            car.setAttribute("transform", "translate(" + Math.max(0, pos.x - 33) + "," + pos.y + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 120 && distanceTravelled <= 138){
+            car.setAttribute("transform", "translate(" + pos.x + "," + (pos.y + 33) + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 138 && distanceTravelled <= 149){
+            car.setAttribute("transform", "translate(" + Math.max(0, pos.x - 33) + "," + pos.y + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 149 && distanceTravelled <= 163){
+            car.setAttribute("transform", "translate(" + pos.x + "," + (pos.y + 33) + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 163 && distanceTravelled <= 197){
+            car.setAttribute("transform", "translate(" + (pos.x + 33) + "," + pos.y + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled > 197 && distanceTravelled <= 239){
+            car.setAttribute("transform", "translate(" + (pos.x - 33) + "," + pos.y + ") rotate(" + angInDeg + ") scale(0.15)");
+          } else if (distanceTravelled >= 239){
+            car.setAttribute("transform", "translate(" + pos.x + "," + Math.max(0, pos.y-33) + ") rotate(" + angInDeg + ") scale(0.15)");
+          }
+        }
+        prevRotation = angInDeg
+      }
+      
+      function radiansToDegrees(rad) {
+        return 180 * rad / Math.PI;
+      }
+
+      function errorInput(textbox){
+        document.getElementById(textbox).style.border = "2px solid darkred"
+        document.getElementById(textbox).style.backgroundColor = "#ffe6e6"
+      }
+
+      function customAlert(text, colour){
+        try {
+          document.getElementsByClassName("alertDiv")[0].remove();
+        }
+        catch(err) {
+          console.log(err.message);
+        }
+        var div = document.createElement("div");
+        div.classList.add("alertDiv")
+        div.style.backgroundColor = colour
+        var divContent = (`<span style="font-family: 'Noto Sans Symbols 2', sans-serif;">🛈</span> ` + text);
+        div.innerHTML = (divContent)
+        document.body.appendChild(div)
+        setTimeout(function(){
+          div.remove();
+        }, 5000)
+      }
+
+      function giveInfo(){
+        try {
+          document.getElementsByClassName("alertDiv")[0].remove();
+        }
+        catch(err) {
+          console.log(err.message);
+        }
+        var div = document.createElement("div");
+        div.classList.add("fullInfoDiv")
+        div.classList.add("alertDiv")
+        div.style.backgroundColor = "#ffe600"
+        var divContent = (`<button id="closePopup" style='position:relative; top: 30px; float: right;height: 25px;width: 25px;' onclick="this.parentElement.style.display='none'">×</button>
+        <h1>How To Play</h1>
+        <br>
+        <b>STEPS</b>
+        <ol>
+          <li>Find someone to play with, and make them open this website in their browser</li>
+          <li>On their device, press the share button on the top left of the main page, and share their User ID</li>
+          <li>Enter their User ID on your device, and press connect player</li>
+          <li>Select a game option and the amount of time you wish to play for</li>
+          <li>Click Start Game and play!</li>
+        </ol>
+        <br>
+        The game modes are as follows:
+        <ul>
+          <li><b>Race Game</b> - Race against your opponent on a track, where you must enter a word closely related to the one your opponent entered, as quickly as possible. The faster you reply, the further you go!</li>
+          <li><b>On The Clock Association</b> - Enter a word closely related to the one your opponent entered, as quickly as possible. The aim is not to run out of time.</li>
+          <li><b>Capital Chaos</b> - Enter the capital city of the country shown as quickly as possible. The aim is not to run out of time.</li>
+          <li><b>Custom</b> - Enter terms and definitions you wish to practice after selecting this option. After starting the game, enter the correct definition of the term shown as quickly as possible. The aim is not to run out of time.</li>
+        </ul>
+        <br>
+        <small>Semantic Similarity by Lushan Han, Abhay L. Kashyap, Tim Finin, James Mayfield and Johnathan Weese, UMBC_EBIQUITY-CORE: Semantic Textual Similarity Systems, Proc. 2nd Joint Conf. on Lexical and Computational Semantics, Association for Computational Linguistics, June 2013.</small>`);
+        div.innerHTML = (divContent)
+        document.body.appendChild(div)
+      }
+      
+      function startMyTimer(){
+        if (meSec == 0){
+          if (meMins == 0){
+            document.getElementById("replaceable").innerHTML = gameOver
+            return
+          } else{
+            meSec = 59
+            meMins -= 1
+          }
+        } else{
+          meSec -= 1
+        }
+        document.getElementById("mytime").innerHTML = "Your Time <br>" + meMins + ":" + meSec.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+      }
+      function startOppTimer(){
+        if (oppSec == 0){
+          if (oppMins == 0){
+            document.getElementById("replaceable").innerHTML = gameWin
+            return
+          } else{
+            oppSec = 59
+            oppMins -= 1
+          }
+        } else{
+          oppSec -= 1
+        }
+        document.getElementById("oppTime").innerHTML = "Opponent's Time <br>" + oppMins + ":" + oppSec.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+      }
+
+      function doneAddingTerms() {
+        cards = document.getElementById("terms").value.split("\n")
+        for (card of cards){
+          terms.push(card.split(",")[0])
+          definitions.push(card.split(",")[1])
+        }
+      }
+      
+      document.getElementById("mode").addEventListener("change", function(){
+        if (document.getElementById("mode").value == "lang"){
+          document.getElementById("popUp").innerHTML = langGetVocab
+          document.getElementById("popUp").style.display = "block"
+        } else{
+          document.getElementById("popUp").innerHTML = ""
+          document.getElementById("popUp").style.display = "none"
+        }
+      })
+      
+			var socket = io();
+      socket.emit('getID');
+      socket.on("playerIdReturn", (id) => { //so each player knows their id
+        document.getElementById("myid").innerHTML = `<button class="yellowBTN" onclick="navigator.clipboard.writeText('` + id + `').then(); navigator.share({text: '`+ id +`'})" style="width: 100%;display: 'inline-block'"><b>SHARE ID | #` + id + `</b></button>`
+      });
+      
+      var player2 = ""; // other player's id
+      document.getElementById('connect').onclick = () => { // request to connect
+        
+        if (document.getElementById("txtInp").value === socket.id){
+          customAlert("Oops! Need another player's ID (you entered your own)", "red")
+          errorInput("txtInp")
+        } else {
+          socket.emit("conPal", document.getElementById("txtInp").value);
+        }
+      }
+      
+      socket.on("oppAnswer", (ans) => {
+        document.getElementById("answer").disabled = false;
+        if (modeChosen == 0){
+          document.getElementById("question").innerHTML = ans
+          usedWords.push(ans)
+        } else if (modeChosen == 1){
+          document.getElementById("question").innerHTML = countries[Math.floor(Math.random()*countries.length)]
+        } else if (modeChosen == 2){
+          document.getElementById("question").innerHTML = terms[Math.floor(Math.random()*terms.length)]
+        } else if(modeChosen == 3){
+          startTime = new Date();
+          console.log("starting")
+          document.getElementById("question").innerHTML = ans
+          usedWords.push(ans)
+          var seconds = 10;
+          timer = setInterval(function(){
+            if(seconds <= 0){
+              clearInterval(timer);
+            }
+            document.getElementById("tenstimer").value = seconds;
+            seconds -= 0.01;
+          }, 10);
+        }
+        if (modeChosen != 3){
+          myTimerOn = setInterval(startMyTimer, 1000);
+          clearInterval(oppTimerOn);
+        }
+      })
+      
+      socket.on("connectStatus", (status) => {
+        if (status[0] === "Connected!"){
+          customAlert(status[0], "green")
+          gameConnected = true
+          document.getElementById("txtInp").style.border = "2px solid green"
+          document.getElementById("txtInp").style.backgroundColor = "#e6fff0"
+        } else {
+          customAlert(status[0], "red")
+          errorInput("txtInp")
+        }
+        if (status[1]){ // if successful connection
+          player2 = status[2]
+        }
+      });
+      
+      socket.on("inviterID", (id) => { // so other player knows who's connected
+        customAlert("Connected to Player #" + id + "!", "green")
+        player2 = id;
+        gameConnected = true
+      })
+      
+      function sendAns(event) {
+        if (event.key === "Enter") {
+          
+          event.preventDefault();
+          if (modeChosen == 0 || modeChosen == 3){
+            console.log("hello")
+            if (usedWords.includes(document.getElementById('answer').value)){
+              customAlert("Already used!", "red")
+            } else{
+              socket.emit("answer", [player2, document.getElementById('answer').value, document.getElementById('question').innerHTML, modeChosen]);
+              
+            }
+          } else if (modeChosen == 1){
+            if (capitals[countries.indexOf(document.getElementById('question').innerHTML)].toLowerCase() == (document.getElementById('answer').value).toLowerCase() || stringSimilarity.compareTwoStrings(capitals[countries.indexOf(document.getElementById('question').innerHTML)], document.getElementById('answer').value) > 0.8){
+              // correct
+              socket.emit("answer", [player2, document.getElementById('answer').value, document.getElementById('question').innerHTML, modeChosen]);
+              document.getElementById("question").innerHTML = "?"
+              document.getElementById("answer").value = ""
+              clearInterval(myTimerOn);
+              socket.emit("updateTime", [player2, meMins, meSec])
+              oppTimerOn = setInterval(startOppTimer, 1000);
+              document.getElementById("answer").style.border = "2px solid black"
+              document.getElementById("answer").style.backgroundColor = "white"
+            } else{
+              customAlert("Incorrect!", "red")
+              errorInput("answer")
+            }
+          } else if (modeChosen == 2){
+            if (definitions[terms.indexOf(document.getElementById('question').innerHTML)].toLowerCase() == (document.getElementById('answer').value).toLowerCase() || stringSimilarity.compareTwoStrings(definitions[terms.indexOf(document.getElementById('question').innerHTML)], document.getElementById('answer').value) > 0.8){
+              socket.emit("answer", [player2, document.getElementById('answer').value, document.getElementById('question').innerHTML, modeChosen]);
+              document.getElementById("question").innerHTML = "?"
+              document.getElementById("answer").value = ""
+              clearInterval(myTimerOn);
+              socket.emit("updateTime", [player2, meMins, meSec])
+              oppTimerOn = setInterval(startOppTimer, 1000);
+              document.getElementById("answer").style.border = "2px solid black"
+              document.getElementById("answer").style.backgroundColor = "white"
+            } else{
+              customAlert("Incorrect!", "red")
+              errorInput("answer")
+            }
+          }
+        }
+      }
+      
+      socket.on("wrongAns", () => {
+        customAlert("Not close enough!", "red")
+        errorInput("answer")
+      })
+
+      socket.on("oppCarPos", (pos) => {
+        changeCarPos(pos, "oppCar")
+      })
+
+      socket.on("validAns", (res) => {
+        if (modeChosen == 0){
+          score = res[0]
+          answer = res[1]
+          document.getElementById("question").innerHTML = "?"
+          document.getElementById("answer").value = ""
+          document.getElementById("answer").style.border = "2px solid black"
+          document.getElementById("answer").style.backgroundColor = "white"
+          document.getElementById("answer").disabled = true;
+          // use the range 'boost' using variable score between 0 and 1
+          boost += score*10
+          document.getElementById('boost').value = boost;
+          if (boost >= 20){
+            boost = 0
+            document.getElementById('boost').value = boost;
+            if (meSec < 40){
+              meSec += 20
+            } else{
+              meMins += 1
+              meSec = (meSec+20)-60
+            }
+            document.getElementById("mytime").innerHTML = "Your Time <br>" + meMins + ":" + meSec.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+          }
+          clearInterval(myTimerOn);
+          socket.emit("updateTime", [player2, meMins, meSec])
+          oppTimerOn = setInterval(startOppTimer, 1000);
+        } else if (modeChosen == 3){
+          clearInterval(timer);
+          document.getElementById("tenstimer").value = 10;
+          endTime = new Date();
+          console.log(endTime)
+          var timeDiff = endTime - startTime;
+          timeDiff /= 1000;
+          var seconds = Math.round(timeDiff);
+          var movedAhead = 10 - seconds
+          console.log(timeDiff)
+          if (movedAhead < 0){
+            movedAhead = 0
+          }
+          myCarDist += movedAhead
+          changeCarPos(myCarDist, "myCar")
+          socket.emit("myCarPos", [player2, myCarDist])
+          if (myCarDist > 250){
+            document.getElementById("replaceable").innerHTML = gameWin;
+            socket.emit("raceGameWin", player2)
+          }
+          document.getElementById("question").innerHTML = "?"
+          document.getElementById("answer").value = ""
+          document.getElementById("answer").style.border = "2px solid black"
+          document.getElementById("answer").style.backgroundColor = "white"
+          document.getElementById("answer").disabled = true;
+        }
+        usedWords.push(res[1])
+      })
+
+      socket.on("gameLost", ()=> {
+        document.getElementById("replaceable").innerHTML = gameOver;
+      })
+      
+      socket.on("updateOppTime", (time) => {
+        document.getElementById("oppTime").innerHTML = "Opponent's Time <br>" + time[0] + ":" + time[1].toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        oppMins = time[0]
+        oppSec = time[1]
+      })
+      
+      socket.on("gameStartRecieve", (msg) => { // when game starts
+        document.getElementById("myid").remove();
+        document.getElementById("startInfo").remove();
+        document.getElementById("replaceable").innerHTML = gameModes[gameVals.indexOf(msg[1])];
+        modeChosen = gameVals.indexOf(msg[1])
+        if (modeChosen != 3){
+          document.getElementById("mytime").innerHTML = "Your Time <br>" + msg[0] + ":00"
+          document.getElementById("oppTime").innerHTML = "Opponent's Time <br>" + msg[0] + ":00"
+          meMins = msg[0]
+          oppMins = msg[0]
+          oppTimerOn = setInterval(startOppTimer, 1000);
+        } else{
+          startedGame = false
+          changeCarPos(0, "myCar")
+          changeCarPos(0, "oppCar")
+          var div = document.createElement("div");
+          var divContent = (`<button class="info" onclick="customAlert('Type a word similar to the word in dark blue as fast as possible - the faster you write, the further you go! The bar at the bottom shows time left until you move no further. You are the <u>Blue</u> car.', '#ff8c00')">?</button>`);
+          div.innerHTML = (divContent)
+          document.body.appendChild(div);
+        }
+        document.getElementById("question").innerHTML = "?"
+        document.getElementById('answer').addEventListener("keypress", sendAns);
+        if (modeChosen == 0){
+          document.getElementById('boost').value = boost;
+          var div = document.createElement("div");
+          var divContent = (`<button class="info" onclick="customAlert('Type a word similar to the word in dark blue, and the person who does not run out of time wins! Your bar at the bottom fills up faster the more closely related the word is - when it is full, you get 20 more seconds!', '#ff8c00')">?</button>`);
+          div.innerHTML = (divContent)
+          document.body.appendChild(div);
+        }
+      });
+
+      function startTheGame(rand, msg){
+        socket.emit("gameStartSend", msg);
+        document.getElementById("myid").remove();
+        modeChosen = gameVals.indexOf(msg[2]);
+        document.getElementById("replaceable").innerHTML = gameModes[modeChosen]
+        if (modeChosen != 3){
+          meMins = msg[1]
+          oppMins = msg[1]
+          document.getElementById("mytime").innerHTML = "Your Time <br>" + msg[1] + ":00"
+          document.getElementById("oppTime").innerHTML = "Opponent's Time <br>" + msg[1] + ":00"
+          myTimerOn = setInterval(startMyTimer, 1000);
+          if (modeChosen === 1){
+            var div = document.createElement("div");
+            var divContent = (`<button class="info" onclick="customAlert('Type the capital of the country in dark blue, and the person who does not run out of time wins!', '#ff8c00')">?</button>`);
+            div.innerHTML = (divContent)
+            document.body.appendChild(div);
+          } else if (modeChosen == 2){
+            var div = document.createElement("div");
+            var divContent = (`<button class="info" onclick="customAlert('Type the correct definition to the term in dark blue, and the person who does not run out of time wins!', '#ff8c00')">?</button>`);
+            div.innerHTML = (divContent)
+            document.body.appendChild(div);
+          }
+        }
+        
+        document.getElementById("question").innerHTML = rand;
+        document.getElementById('answer').addEventListener("keypress", sendAns);
+      }
+
+      socket.on("langGameTermsAndDefs", (arrays) => {
+        terms= arrays[0]
+        definitions = arrays[1]
+      })
+      
+      document.getElementById('start').onclick = () => {
+        if (gameVals.indexOf(document.getElementById('mode').value) != 3 && document.getElementById("MaxTime").value == ""){
+          var timeValid = false
+        } else{
+          var timeValid = true
+        }
+        if (gameConnected && timeValid){
+          msg = [player2, document.getElementById('MaxTime').value, document.getElementById('mode').value]
+          modeChosen = gameVals.indexOf(msg[2])
+          if (modeChosen === 0 || modeChosen == 3){
+            var randomWord = words[Math.floor(Math.random()*words.length)]
+            startTheGame(randomWord, msg)
+            socket.emit("startingQuestion", [player2, randomWord]);
+            if (modeChosen != 3){
+              document.getElementById('boost').value = boost;
+              var div = document.createElement("div");
+              var divContent = (`<button class="info" onclick="customAlert('Type a word similar to the word in dark blue, and the person who does not run out of time wins! Your bar at the bottom fills up faster the more closely related the word is - when it is full, you get 20 more seconds!', '#ff8c00')">?</button>`);
+              div.innerHTML = (divContent)
+              document.body.appendChild(div);
+            } else{
+              startedGame = true
+              changeCarPos(0, "myCar")
+              changeCarPos(0, "oppCar")
+              startTime = new Date();
+              var div = document.createElement("div");
+              var divContent = (`<button class="info" onclick="customAlert('Type a word similar to the word in dark blue as fast as possible - the faster you write, the further you go! The bar at the bottom shows time left until you move no further. You are the <u>Red</u> car.', '#ff8c00')">?</button>`);
+              div.innerHTML = (divContent)
+              document.body.appendChild(div);
+              var seconds = 10;
+              timer = setInterval(function(){
+                if(seconds <= 0){
+                  clearInterval(timer);
+                }
+                document.getElementById("tenstimer").value = seconds;
+                seconds -= 0.01;
+              }, 10);
+            }
+          } else if (modeChosen === 1){
+            var div = document.createElement("div");
+            var divContent = (`<button class="info" onclick="customAlert('Type the capital of the country in dark blue, and the person who does not run out of time wins!', '#ff8c00')">?</button>`);
+            div.innerHTML = (divContent)
+            document.body.appendChild(div);
+            startTheGame(countries[Math.floor(Math.random()*countries.length)], msg)
+          } else if (modeChosen == 2){
+            var div = document.createElement("div");
+            var divContent = (`<button class="info" onclick="customAlert('Type the correct definition to the term in dark blue, and the person who does not run out of time wins!', '#ff8c00')">?</button>`);
+            div.innerHTML = (divContent)
+            document.body.appendChild(div);
+            if (terms.length != 0 && definitions.length != 0){
+              socket.emit("termsAndDefs", [player2, terms, definitions]);
+              startTheGame(terms[Math.floor(Math.random()*terms.length)], msg)
+            } else{
+              customAlert("Please enter terms to use the language mode.", "red")
+            }
+          }
+          
+          
+        } else{
+          if (!timeValid){
+            customAlert("Enter a time for each player for this game mode.", "red")
+          } else{
+            customAlert("Oops, forgot to connect another player!", "red")
+          }
+        }
+      }
+
+      socket.on("storeStartQ", (question) => {
+        usedWords.push(question)
+      })
+		</script>
+    <style>
+      
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+
+      body{
+        overflow:hidden;
+      }
+
+      #replaceable{
+        width: 70vw;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .info{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 50px;
+        height: 25px;
+        width: 25px;
+        background-color: yellow;
+        border: 2px solid black;
+      }
+
+      #replaceable *{
+        margin: 4px;
+      }
+
+      #myid{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+
+      #popUp{
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 5px 2px lightblue;
+        width: 50vw;
+        background-color: white;
+        padding: 10px;
+        border-radius: 7px;
+      }
+      #terms{
+        width: 98%;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 3px;
+      }
+
+      #timeFlexCont{
+        text-align: center;
+      }
+      
+      .done{
+        float:right;
+      }
+      #closePopup{
+        background-color: red;
+        color: white;
+        border-radius: 50px;
+        border: none;
+      }
+      
+      #start, #mode{
+        padding: 4px;
+        border-radius: 4px;
+        border: 2px solid black;
+      }
+
+      #start{
+        width: 100%;
+      }
+
+      #mode{
+        width: 98.5%;
+      }
+
+      #txtInp, #MaxTime, #connect{
+        border: 2px solid black;
+        padding: 4px; 
+        border-radius: 3px;
+      }
+
+      #connect, #txtInp{
+        width: 20ch;
+      }
+      
+      #question, #answer{
+        text-align: center;
+        width: 100%;
+        margin: 3px;
+      }
+
+      #question{
+        font-size: 3rem;
+        font-weight: bold;
+        color: darkblue;
+        padding: 4px; 
+        border-radius: 3px;
+      }
+      
+      #answer{
+        padding: 3px;
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        font-size: 1rem;
+      }
+      #mytime, #oppTime{
+        text-align: center;
+        border-radius: 5px;
+        padding: 4px;
+        margin: 3px;
+        width: 40%;
+        font-weight: bold;
+        display:inline-block;
+      }
+      #mytime{
+        background-color: lightcoral;
+        border: 2px solid lightcoral;
+      }
+      #oppTime{
+        background-color: lightblue;
+        border: 2px solid lightblue;
+      }
+      progress{
+        width:100%;
+        border: 2px solid black;
+        border-radius: 100px;
+      }
+      progress::-webkit-progress-value {
+        background-color: yellow;
+        border-radius: 100px;
+        border: 1px solid black;
+      }
+      progress::-webkit-progress-bar {
+        background-color: white;
+        border-radius: 100px;
+      }
+      .alertDiv{
+        position: absolute;
+        bottom: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 5px;
+        animation-name: sizeUp;
+        animation-direction: normal;
+        animation-duration: 0.5s;
+        color: white;
+        font-weight: bold;
+      }
+
+      .fullInfoDiv{
+        top: 0px;
+        bottom: auto;
+        height: 96vh;
+        padding: 30px;
+        text-align: left;
+        overflow-y: scroll;
+        font-weight: normal;
+        color:black;
+      }
+
+      @keyframes sizeUp{
+        from {transform: translate(-100%, 0%) scale(1);}
+        to {transform: translate(0%, 0%) scale(1);}
+      }
+
+      #mainCont{
+        text-align: center;
+      }
+
+      #mainCont > *{
+        font-size: 1.3rem;
+      }
+
+      #start{
+        font-size: 1.3rem;
+      }
+
+      #myid button{
+        font-size: 1rem;
+      }
+      
+      
+      .blueBTN {
+        box-shadow: 2px 2px darkblue;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: white;
+        color: darkblue;
+        border: 2px solid black;
+        font-weight:bold;
+      }
+      
+      .blueBTN:hover{
+        box-shadow: 4px 4px darkblue;
+        transform: translate(-4px, -4px);
+      }
+
+      .blueBTN:active{
+        box-shadow: 0px 0px black;
+        transform: translate(0px, 0px);
+        background-color: darkblue;
+        color: white;
+        
+      }.yellowBTN {
+        box-shadow: 2px 2px #464700;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: lightyellow;
+        color: #464700;
+        border: 2px solid black;
+        font-weight:bold;
+      }
+      
+      .yellowBTN:hover{
+        box-shadow: 4px 4px #464700;
+        transform: translate(-4px, -4px);
+      }
+
+      .yellowBTN:active{
+        box-shadow: 0px 0px black;
+        transform: translate(0px, 0px);
+        background-color: yellow;
+        color: #464700;
+      }
+
+      #otherOptions{
+        border: 2px solid black;
+        padding: 5px;
+        border-radius: 5px;
+        
+      }
+
+      #title{
+        text-align:center;
+        font-size: 3rem;
+        user-select:none;
+      }
+
+      #myCar, #oppCar{
+        transition: transform 330ms ease-in-out;
+      }
+      
+      .moveUp{
+        transform: translate(0px, -100px);
+      }
+      @media (max-width: 600px) {
+        body{
+          overflow:scroll;
+        }
+        .moveUp{
+          transform: translate(0px, -150px);
+        }
+      }
+    </style>
+  </body>
+</html>

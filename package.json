@@ -1,0 +1,29 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "node-fetch": "^2.6.9",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "build:win": "npx pkg ./index.js -c package.json -t node14-win-x64",
+  "pkg": {
+    "assets": [
+      "./public/index.html"
+    ],
+    "targets": [
+      "node14-win-x64",
+      "node12-macos-x64"
+    ],
+    "outputPath": "./dist"
+  }
+}
